@@ -3,7 +3,7 @@ import CartProduct from './CartProduct';
 class Cart {
     
     cartArray: Array<CartProduct>;
-    totalPrice: Number;
+    totalPrice: number;
 
 
     constructor() {
@@ -22,35 +22,42 @@ class Cart {
         return -1;
     }
 
-    addProduct(product: any): void {
+    addProduct(product: any) {
         const productIndex = this.indexOfProduct(product.name);
 
         if (productIndex === -1) {
             this.cartArray.push(new CartProduct(product.name, product.description, product.price, 
-                product.amount, product.limit))
+                1, product.limit))
+            this.totalPrice += product.price;
         }
     }
 
-    removeProduct (productName: string): void {
+    removeProduct (productName: string) {
         const productIndex = this.indexOfProduct(productName);
 
         if (productIndex !== -1) {
-            this.totalPrice =- this.cartArray[productIndex].price;
-            this.cartArray.filter (p => p.name !== productName); // removing the product with name, productName
+            this.totalPrice -= this.cartArray[productIndex].price;
+            this.cartArray = this.cartArray.filter(item => item.name !== productName); // removing the product with name, productName
         }    
     }
 
 
-    updateProductAmount(productName: string, newAmount) {
+    updateProductAmount(productName: string, newAmount: number) {
         const productIndex = this.indexOfProduct(productName);
 
         if (productIndex !== -1) {
             let product = this.cartArray[productIndex];
             if(product.limit === undefined || newAmount < product.limit) {
                 const difOfAmount: number = newAmount - product.amount;
-                this.totalPrice =+ ( difOfAmount * product.price)
+                this.totalPrice += ( difOfAmount * product.price)
+                product.amount = newAmount;
             }
         }
+    }
+
+    checkout() {
+        this.cartArray = [];
+        this.totalPrice = 0;  
     }
 
 
