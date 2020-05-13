@@ -39,3 +39,4 @@ docs
 lib
 tmp
 .tmp
+.vscode/
