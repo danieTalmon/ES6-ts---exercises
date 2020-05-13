@@ -1,9 +1,5 @@
-type Record<String , Number> = {
-    [index: string]: number
-}
-
 export class Cart {
-    cartObject: Record<String,Number>;
+    cartObject: Record<string,number>;
     totalPrice: number;
 
     constructor() {
