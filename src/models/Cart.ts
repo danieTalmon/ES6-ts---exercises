@@ -1,66 +1,46 @@
-import CartProduct from './CartProduct';
+type Record<String , Number> = {
+    [index: string]: number
+}
 
-class Cart {
-    
-    cartArray: Array<CartProduct>;
+export class Cart {
+    cartObject: Record<String,Number>;
     totalPrice: number;
 
-
     constructor() {
-        this.cartArray = [];
+        this.cartObject = {};
         this.totalPrice = 0;
     }
 
-    indexOfProduct (productName: string): number {
-        for (let index = 0; index < this.cartArray.length; index++) {
-            const product = this.cartArray[index];
-            if(product.name === productName) {
-                return index;
-            }
-        }
+    addProduct(productName: string, productPrice: number) { 
 
-        return -1;
-    }
-
-    addProduct(product: any) {
-        const productIndex = this.indexOfProduct(product.name);
-
-        if (productIndex === -1) {
-            this.cartArray.push(new CartProduct(product.name, product.description, product.price, 
-                1, product.limit))
-            this.totalPrice += product.price;
+        if (!(productName in this.cartObject)) {
+            this.cartObject[productName] = 1;
+            this.totalPrice += productPrice;
         }
     }
 
-    removeProduct (productName: string) {
-        const productIndex = this.indexOfProduct(productName);
+    removeProduct (productName: string, productPrice: number) {
 
-        if (productIndex !== -1) {
-            this.totalPrice -= this.cartArray[productIndex].price;
-            this.cartArray = this.cartArray.filter(item => item.name !== productName); // removing the product with name, productName
+        if (productName in this.cartObject) {
+            this.totalPrice -= productPrice;
+            delete this.cartObject[productName]; // removing the product with name, productName
         }    
     }
 
+    updateProductAmount(productName: string, productPrice: number,  newAmount: number, productLimit: number) {
 
-    updateProductAmount(productName: string, newAmount: number) {
-        const productIndex = this.indexOfProduct(productName);
-
-        if (productIndex !== -1) {
-            let product = this.cartArray[productIndex];
-            if(product.limit === undefined || newAmount < product.limit) {
-                const difOfAmount: number = newAmount - product.amount;
-                this.totalPrice += ( difOfAmount * product.price)
-                product.amount = newAmount;
+        if (productName in this.cartObject) {
+            let productAmount = this.cartObject[productName];
+            if(productLimit === undefined || newAmount < productLimit) {
+                const difOfAmount: number = newAmount - productAmount;
+                this.totalPrice += ( difOfAmount * productPrice)
+                this.cartObject[productName] = newAmount;
             }
         }
     }
 
     checkout() {
-        this.cartArray = [];
+        this.cartObject = {};
         this.totalPrice = 0;  
     }
-
-
 }
-
-export default Cart;
