@@ -25,7 +25,7 @@ var Cart = /** @class */ (function () {
         var productIndex = this.indexOfProduct(productName);
         if (productIndex !== -1) {
             this.totalPrice = -this.cartArray[productIndex].price;
-            this.cartArray.filter(function (p) { return p.name !== productName; }); // removing the product with name, productName
+            this.cartArray.filter(function (p) { return p.name !== productName; }); 
         }
     };
     Cart.prototype.updateProductAmount = function (productName, newAmount) {

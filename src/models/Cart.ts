@@ -13,7 +13,7 @@ export class Cart {
 
     addProduct(productName: string, productPrice: number) { 
 
-        if (!(productName in this.cartObject)) {
+        if (!(this.cartObject[productName])) {
             this.cartObject[productName] = 1;
             this.totalPrice += productPrice;
         }
@@ -21,20 +21,20 @@ export class Cart {
 
     removeProduct (productName: string, productPrice: number) {
 
-        if (productName in this.cartObject) {
+        if (this.cartObject[productName]) {
             this.totalPrice -= productPrice;
-            delete this.cartObject[productName]; // removing the product with name, productName
+            delete this.cartObject[productName];
         }    
     }
 
-    updateProductAmount(productName: string, productPrice: number,  newAmount: number, productLimit: number) {
+    updateProductAmount(product: any,  newAmount: number) {
 
-        if (productName in this.cartObject) {
-            let productAmount = this.cartObject[productName];
-            if(productLimit === undefined || newAmount < productLimit) {
+        if (this.cartObject[product.name]) {
+            const productAmount = this.cartObject[product.name];
+            if(product.limit || newAmount < product.limit) {
                 const difOfAmount: number = newAmount - productAmount;
-                this.totalPrice += ( difOfAmount * productPrice)
-                this.cartObject[productName] = newAmount;
+                this.totalPrice += ( difOfAmount * product.price)
+                this.cartObject[product.name] = newAmount;
             }
         }
     }
