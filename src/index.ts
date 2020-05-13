@@ -42,9 +42,3 @@ fs.readFile('./products.json', (err, productsbuffer) => {
     console.log('---------------------');
 
 });
-
-
-
-
-
-
