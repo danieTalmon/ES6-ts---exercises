@@ -1,42 +1,42 @@
 export class Cart {
-    cartObject: Record<string,number>;
+    cart: Record<string,number>;
     totalPrice: number;
 
     constructor() {
-        this.cartObject = {};
+        this.cart = {};
         this.totalPrice = 0;
     }
 
     addProduct(productName: string, productPrice: number) { 
 
-        if (!(this.cartObject[productName])) {
-            this.cartObject[productName] = 1;
+        if (!(this.cart[productName])) {
+            this.cart[productName] = 1;
             this.totalPrice += productPrice;
         }
     }
 
     removeProduct (productName: string, productPrice: number) {
 
-        if (this.cartObject[productName]) {
+        if (this.cart[productName]) {
             this.totalPrice -= productPrice;
-            delete this.cartObject[productName];
+            delete this.cart[productName];
         }    
     }
 
     updateProductAmount(product: any,  newAmount: number) {
 
-        if (this.cartObject[product.name]) {
-            const productAmount = this.cartObject[product.name];
+        if (this.cart[product.name]) {
+            const productAmount = this.cart[product.name];
             if(product.limit || newAmount < product.limit) {
                 const difOfAmount: number = newAmount - productAmount;
                 this.totalPrice += ( difOfAmount * product.price)
-                this.cartObject[product.name] = newAmount;
+                this.cart[product.name] = newAmount;
             }
         }
     }
 
     checkout() {
-        this.cartObject = {};
+        this.cart = {};
         this.totalPrice = 0;  
     }
 }
