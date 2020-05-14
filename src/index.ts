@@ -13,7 +13,7 @@ fs.readFile('./products.json', (err, productsbuffer) => {
     if(err) {
         throw err;
     }
-    const productsJson: Product[] = JSON.parse(productsbuffer.toString());
+    const products: Product[] = JSON.parse(productsbuffer.toString());
 
     let cart: Cart = new Cart();
 
