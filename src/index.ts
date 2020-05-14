@@ -1,7 +1,7 @@
 import { Cart } from './models/Cart';
 import fs = require('fs');
 
-interface Product {
+export interface Product {
     name: string;
     description:string;
     price: number;
