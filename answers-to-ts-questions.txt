@@ -1,0 +1,27 @@
+1) type vs interface vs class :
+A:  interface declaration, always introduces a named object type, when type
+introduce a name for any kind of type, including primitive, union, and intersection types.
+class. interface and type are both declarative but class can be a prototype
+that could be an instances of it.
+2) let vs const vs var?
+A: let is exist in the block scope is declared and mutable when var exist in 
+the function scope.
+var and let are declare a mutable variables when const declare immutable 
+variables.
+3) nothing, interface not exist in javascript and transperent for javascript.
+4) configuration for typescript compiler, indicate where 
+the ts files are exist,also declare options and rules for the compiler.
+5)  they are files that contains: 
+    -They don't contain implementation, only declarations
+    -The only contain publicly accessible types
+6) -reduce: reducing an array with reducer function to a single value.
+   -filter: creates a new array with all elements that
+    pass the condition that in the provided function.
+   -map: creates a new array populated with the results of calling 
+   a provided function on every element in the calling array.
+   -forEach: executes a provided function once for each array element
+   -find: returns the value of the first element in the calling array 
+   that satisfies the provided condition function.
+   some: check whether at least one element in the calling array passes the 
+   test condition implemented by the provided function.
+    It returns a Boolean value.
